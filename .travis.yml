@@ -6,4 +6,4 @@ before_install:
     - docker build -t deneesh/docker-react -f dockerfile.dev .
 
 script: 
-    - docker run deneesh/docker-react npn run test -- --coverage
+    - docker run deneesh/docker-react npm run test -- --coverage
