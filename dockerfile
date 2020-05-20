@@ -1,5 +1,9 @@
-FROM ubuntu
+FROM node:alpine as builder
+WORKDIR '/app'
+COPY package.json
+RUN npm install
+COPY . .
+RUN npm run builder
 
-RUN "apt install apache2"
-RUN "apt install gcc, python3, libxml"
-CMD ["service", "apache2", "start"]
+FROM nginx 
+COPY --from=builder /app/build/ /usr/share/nginx/html
